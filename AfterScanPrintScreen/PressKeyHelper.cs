@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
+using System.Drawing;
+using System.Diagnostics;
+using System.Threading;
 
 namespace AfterScanPrintScreen
 {
@@ -22,6 +25,11 @@ namespace AfterScanPrintScreen
         /// <param name="dwExtraInfo"></param>
         [DllImport("user32.dll")]
         static extern void keybd_event(byte bVk, byte bScan, int dwFlags, int dwExtraInfo);
+        [DllImport("user32.dll")]
+        private static extern IntPtr FindWindow(string className, string windowName);
+
+        [DllImport("user32.dll")]
+        private static extern int GetWindowRect(IntPtr hwnd, out Rectangle rect);
         private const int KEY_DOWN_FLAG = 0x0001;
         private const int KEY_UP_FLAG = 0x0002;
         public static void PressSpecialKey(string key)
@@ -68,5 +76,13 @@ namespace AfterScanPrintScreen
             {"down",40 },
             {"printscreen",44 },
         };
+        public static Rectangle GetRect(string processName)
+        {
+            var p = Process.GetProcessesByName(processName).Single();
+            var hwnd = p.MainWindowHandle;
+            Rectangle rect;
+            GetWindowRect(hwnd, out rect);
+            return rect;
+        }
     }
 }

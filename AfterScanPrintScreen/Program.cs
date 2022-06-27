@@ -8,6 +8,7 @@ namespace AfterScanPrintScreen
 {
     internal class Program
     {
+        [STAThread]
         static void Main(string[] args)
         {
             MainWorkflow wf = new MainWorkflow();
