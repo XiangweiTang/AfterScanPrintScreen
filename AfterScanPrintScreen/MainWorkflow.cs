@@ -26,11 +26,13 @@ namespace AfterScanPrintScreen
         /// </summary>
         private void CallScanWindow()
         {
+            Thread.Sleep(5000);
             Process.Start("cmd.exe", $"/Cstart ms-settings:windowsdefender");
             // Sleep 5 seconds for the delay of window display.
             Thread.Sleep(5000);
             PressKeyHelper.PressSpecialKey("tab");
             PressKeyHelper.PressSpecialKey("enter");
+            PressKeyHelper.PressSpecialKey("printscreen");
         }
     }
 }
