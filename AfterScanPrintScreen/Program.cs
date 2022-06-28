@@ -11,8 +11,9 @@ namespace AfterScanPrintScreen
         [STAThread]
         static void Main(string[] args)
         {
-            MainWorkflow wf = new MainWorkflow();
-            wf.Run();
+            //MainWorkflow wf = new MainWorkflow();
+            //wf.Run();
+            new Test().Run();
         }
     }
 }
